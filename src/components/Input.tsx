@@ -12,11 +12,15 @@ import { ICountry } from "../types/ICountry";
 
 type InputProps = {
   countries: ICountry[];
-  setFiltredCountires: Dispatch<SetStateAction<ICountry[]>>;
+  setFilteredCountries: Dispatch<SetStateAction<ICountry[]>>;
   setPage: (arg: number) => void;
 };
 
-const Input: FC<InputProps> = ({ countries, setFiltredCountires, setPage }) => {
+const Input: FC<InputProps> = ({
+  countries,
+  setFilteredCountries,
+  setPage,
+}) => {
   const [inputValue, setInputValue] = useState("");
   const debouncedSearch = useDebounce(inputValue);
 
@@ -31,7 +35,7 @@ const Input: FC<InputProps> = ({ countries, setFiltredCountires, setPage }) => {
   };
 
   useEffect(() => {
-    setFiltredCountires(filterByInput(debouncedSearch));
+    setFilteredCountries(filterByInput(debouncedSearch));
     setPage(0);
     // eslint-disable-next-line
   }, [debouncedSearch]);
@@ -45,7 +49,7 @@ const Input: FC<InputProps> = ({ countries, setFiltredCountires, setPage }) => {
           setInputValue(e.target.value)
         }
         type="text"
-        placeholder="Seatch for a country..."
+        placeholder="Search for a country..."
       />
     </>
   );

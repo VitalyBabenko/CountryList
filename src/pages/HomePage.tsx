@@ -31,23 +31,28 @@ const HomePage = () => {
     setFilteredCountries(countries);
   }, [countries]);
 
-  if (isLoading) return <LoadingPage />;
   return (
     <div className="home-page">
       <div className="filters">
         <Input
           countries={countries}
-          setFiltredCountires={setFilteredCountries}
+          setFilteredCountries={setFilteredCountries}
           setPage={setPage}
         />
         <Select />
       </div>
 
-      {filteredCountries
-        .slice(firstContentIndex, lastContentIndex)
-        .map((country) => (
-          <CountryCard key={country.name.common} country={country} />
-        ))}
+      {isLoading ? (
+        <LoadingPage />
+      ) : (
+        <>
+          {filteredCountries
+            .slice(firstContentIndex, lastContentIndex)
+            .map((country) => (
+              <CountryCard key={country.name.common} country={country} />
+            ))}
+        </>
+      )}
 
       <Pagination
         page={page}
