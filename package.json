@@ -1,7 +1,6 @@
 {
   "name": "countries-info",
   "version": "0.1.0",
-  "homepage": "https://vitalybabenko.github.io/CountryList/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",

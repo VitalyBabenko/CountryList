@@ -10,7 +10,7 @@ const Header: FC = () => {
 
   return (
     <header>
-      <Link to="/CountryList">Were in the world?</Link>
+      <Link to="/">Were in the world?</Link>
       <button onClick={toggleTheme}>
         {theme === "dark" ? (
           <>

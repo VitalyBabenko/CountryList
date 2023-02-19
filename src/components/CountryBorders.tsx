@@ -20,10 +20,7 @@ const CountryBorders: FC<CountryBordersProps> = ({ borders }) => {
     <div className="country-borders">
       <p>Border countries:</p>
       {neighbors.map((neighbor) => (
-        <NavLink
-          to={`/CountryList/${neighbor.name.common}`}
-          key={neighbor.name.common}
-        >
+        <NavLink to={`/${neighbor.name.common}`} key={neighbor.name.common}>
           {neighbor.name.common}
         </NavLink>
       ))}
