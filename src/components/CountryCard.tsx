@@ -11,10 +11,7 @@ interface CountryCardPorps {
 
 const CountryCard: FC<CountryCardPorps> = ({ country }) => {
   return (
-    <NavLink
-      to={`/CountryList/${country.name.common}`}
-      className="country-card"
-    >
+    <NavLink to={`/${country.name.common}`} className="country-card">
       <img src={country.flags.png} alt="" />
       <h3>{`${country.name.common}`}</h3>
       <CountryInfo
