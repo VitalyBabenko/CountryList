@@ -8,22 +8,21 @@ const appAxios = axios.create({
   method: "GET",
 });
 
+const countriesFields = "name,flags,population,region,capital";
+const countryFields = `${countriesFields},subregion,area,languages,borders`;
+
 export const fetchCountries = createAsyncThunk(
   "countries/fetchAll",
 
   async (region: string | undefined = "all", thunkAPI) => {
     try {
-      if (region === "all") {
-        const { data } = await appAxios<ICountry[]>(
-          `all?fields=name,flags,population,region,capital`
-        );
-        return data;
-      } else {
-        const { data } = await appAxios<ICountry[]>(
-          `subregion/${region}?fields=name,flags,population,region,capital`
-        );
-        return data;
-      }
+      const { data } = await appAxios<ICountry[]>({
+        url: region === "all" ? "all" : `subregion/${region}`,
+        data: {
+          fields: countriesFields,
+        },
+      });
+      return data;
     } catch (e) {
       return thunkAPI.rejectWithValue("error");
     }
@@ -35,9 +34,12 @@ export const fetchCountry = createAsyncThunk(
 
   async (name: string | undefined, thunkAPI) => {
     try {
-      const { data } = await appAxios<ICountry[]>(
-        `name/${name}?&fields=name,flags,population,region,subregion,capital,area,startofweek,languages,borders`
-      );
+      const { data } = await appAxios<ICountry[]>({
+        url: `name/${name}`,
+        data: {
+          fields: countryFields,
+        },
+      });
       return data[0];
     } catch (e) {
       return thunkAPI.rejectWithValue("error");
@@ -50,9 +52,12 @@ export const fetchNeighbors = createAsyncThunk(
 
   async (codes: [string], thunkAPI) => {
     try {
-      const { data } = await appAxios<ICountry[]>(
-        `alpha?codes=${codes.join(",")}&fields=name`
-      );
+      const { data } = await appAxios<ICountry[]>({
+        url: `alpha?codes=${codes.join(",")}`,
+        data: {
+          fields: "name",
+        },
+      });
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue("error");

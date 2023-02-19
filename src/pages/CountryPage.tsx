@@ -2,6 +2,7 @@ import { FC, useEffect } from "react";
 import { MdArrowBack } from "react-icons/md";
 import { useParams, useNavigate } from "react-router-dom";
 import CountryBorders from "../components/CountryBorders";
+import CountryInfo from "../components/CountryInfo";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import "../scss/countryPage.scss";
 import { fetchCountry } from "../store/reducers/ActionCreators";
@@ -32,32 +33,23 @@ const CountryPage: FC = () => {
       <img src={country.flags.svg} alt="country-flag" />
       <h2>{country.name.common}</h2>
 
-      <ul className="country-info">
-        <li>
-          Official name: <span>{country.name.official}</span>
-        </li>
-        <li>
-          Population: <span>{country.population}</span>
-        </li>
-        <li>
-          Region: <span>{country.region}</span>
-        </li>
-        <li>
-          Sub Region: <span>{country.subregion}</span>
-        </li>
-      </ul>
+      <CountryInfo
+        info={[
+          ["Official name", country.name.official],
+          ["Population", country.population],
+          ["Region", country.region],
+          ["Sub Region", country.subregion],
+        ]}
+      />
 
-      <ul className="country-info">
-        <li>
-          Capital: <span>{country.capital}</span>
-        </li>
-        <li>
-          Area: <span>{country.area}</span>
-        </li>
-        <li>
-          Languages: <span>{Object.values(country.languages).join(", ")}</span>
-        </li>
-      </ul>
+      <CountryInfo
+        info={[
+          ["Capital", country.capital],
+          ["Area", country.area],
+          ["Languages", Object.values(country.languages).join(", ")],
+        ]}
+      />
+
       <CountryBorders borders={country.borders} />
     </div>
   );

@@ -19,7 +19,6 @@ function App() {
   return (
     <div className="app">
       <Header />
-
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/:name" element={<CountryPage />} />

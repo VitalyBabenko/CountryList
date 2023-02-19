@@ -51,16 +51,15 @@ const HomePage = () => {
             .map((country) => (
               <CountryCard key={country.name.common} country={country} />
             ))}
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            prevPage={prevPage}
+            nextPage={nextPage}
+            setPage={setPage}
+          />
         </>
       )}
-
-      <Pagination
-        page={page}
-        totalPages={totalPages}
-        prevPage={prevPage}
-        nextPage={nextPage}
-        setPage={setPage}
-      />
     </div>
   );
 };
